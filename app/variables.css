@@ -1,0 +1,12 @@
+:root {
+  --primary-color: #1f1918;
+  --secondary-color: #f5f5ef;
+  --accent-color: #d09c96;
+  --text-color: #1f1918;
+  --background-color: #f5f5ef;
+}
+
+body {
+  --font-heading: var(--font-domine);
+  --font-body: var(--font-manrope);
+}

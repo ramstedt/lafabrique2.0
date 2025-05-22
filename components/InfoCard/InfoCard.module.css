@@ -1,0 +1,24 @@
+.container {
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 290px;
+  margin-bottom: 1rem;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 230px;
+  height: 200px;
+  overflow: hidden;
+  margin: auto;
+}
+.imageWrapper img {
+  object-fit: cover;
+}
+
+.spaceAround {
+  margin: 10px;
+}

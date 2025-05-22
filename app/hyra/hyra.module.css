@@ -1,0 +1,25 @@
+.wrapper {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 2% 2% 2%;
+}
+
+.rentalsWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  z-index: 5;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.form {
+  display: flex;
+  justify-content: center;
+}
+@media screen and (min-width: 768px) {
+  .rentalsWrapper {
+    flex-direction: row;
+    gap: 2rem;
+  }
+}

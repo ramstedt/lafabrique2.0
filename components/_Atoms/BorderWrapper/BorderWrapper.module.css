@@ -1,0 +1,20 @@
+.border1 {
+  border: 1px #302819;
+  border-style: dotted solid solid dotted;
+  border-radius: 255px 15px 255px 15px / 15px 255px 15px 255px;
+  overflow: hidden;
+}
+
+.border2 {
+  border: 1px #302819;
+  border-style: solid dotted solid dotted;
+  border-radius: 20px 600px 15px 150px / 500px 15px 255px 14px;
+  overflow: hidden;
+}
+
+.border3 {
+  border: 1px #302819;
+  border-style: solid dotted solid dotted;
+  border-radius: 50px 500px 20px 180px / 400px 30px 255px 20px;
+  overflow: hidden;
+}

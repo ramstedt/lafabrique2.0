@@ -1,0 +1,28 @@
+.wrapper {
+  width: 100vw;
+  padding: 3rem 1rem;
+  box-sizing: border-box;
+  margin: 0;
+  margin-bottom: 3rem;
+  height: fit-content;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.wrapper p {
+  max-width: 1440px;
+  margin: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .wrapper {
+    padding: 3rem 2rem;
+  }
+}
+
+/*
+rgba(163, 177, 138, 0.5)
+rgba(184, 80, 66, 0.5)
+rgba(225, 169, 85, 0.5)
+*/

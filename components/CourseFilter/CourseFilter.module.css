@@ -1,0 +1,5 @@
+.filterWrapper select {
+  border: 1px #302819;
+  border-style: dotted solid solid dotted;
+  border-radius: 255px 15px 255px 15px / 15px 255px 15px 255px;
+}

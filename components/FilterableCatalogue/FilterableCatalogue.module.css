@@ -1,0 +1,23 @@
+.cardsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.section {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+@media screen and (min-width: 768px) {
+  .cardsWrapper {
+    justify-content: flex-start;
+  }
+
+  .section h2 {
+    width: 100%;
+  }
+}

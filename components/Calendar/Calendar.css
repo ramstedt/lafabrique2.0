@@ -1,0 +1,41 @@
+.rbc-header {
+  background: #55462b;
+  color: rgb(241, 241, 241);
+  padding: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.rbc-event {
+  color: #55462b;
+  border: 1px solid;
+  font-size: 14px;
+  padding: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.rbc-today {
+  background: rgba(46, 204, 112, 0.393);
+}
+
+.rbc-toolbar button {
+  background: #55462b !important;
+  color: rgb(241, 241, 241);
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+}
+.rbc-toolbar button:focus,
+.rbc-toolbar button:active,
+.rbc-toolbar button:hover {
+  background: #332a1a !important;
+  color: rgb(241, 241, 241) !important;
+}
+
+.rbc-show-more {
+  color: #55462b;
+  background: none;
+}
