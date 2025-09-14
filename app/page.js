@@ -19,7 +19,14 @@ export default async function Home() {
 
   return (
     <>
-      <Hero gallery={landing.landingPage.gallery} />
+      <Hero
+        src='/assets/hero.mp4'
+        poster='/assets/hero-poster.jpg'
+        title='KONSTKURSER FÖR ALLA'
+        subtitle='Kreativ gemenskap i Majorna'
+        ctaText='Kurser, workshops, möhippa, företagsevent med mera'
+        ctaHref='/kurser'
+      />
       <p className={styles.intro}>
         Välkommen att bli en del av vårt konstnärliga kollektiv, <br />
         en ateljé i hjärtat av{' '}
@@ -72,7 +79,7 @@ export default async function Home() {
           <small>
             Här listas kommande events hos oss. Om du är ute efter kurser och
             workshops, vänligen kika i vår{' '}
-            <Link href="/katalog" style={{ textDecoration: 'underline' }}>
+            <Link href='/katalog' style={{ textDecoration: 'underline' }}>
               kurskatalog
             </Link>
             !

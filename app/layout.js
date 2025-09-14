@@ -1,4 +1,4 @@
-import { Domine, Manrope } from 'next/font/google';
+import { Domine, Kumbh_Sans, Manrope } from 'next/font/google';
 import './variables.css';
 import './globals.css';
 import Footer from '@/components/Footer/Footer';
@@ -22,6 +22,13 @@ export const manrope = Manrope({
   display: 'swap',
 });
 
+export const kumbhSans = Kumbh_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  variable: '--font-kumbh-sans',
+  display: 'swap',
+});
+
 export const metadata = {
   title: 'La Fabrique',
   description:
@@ -31,16 +38,16 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   const { data } = await fetchFooter();
   return (
-    <html lang="sv">
+    <html lang='sv'>
       <body className={`${domine.variable} ${manrope.variable}`}>
         <Navbar />
-        <div className="bgImageWrapper">
+        <div className='bgImageWrapper'>
           <Image
-            src="/assets/camomile11.svg"
+            src='/assets/camomile11.svg'
             width={500}
             height={500}
-            alt="Camomile flower sketch"
-            className="bgImage"
+            alt='Camomile flower sketch'
+            className='bgImage'
             priority
           />
         </div>
