@@ -39,7 +39,9 @@ export default async function RootLayout({ children }) {
   const { data } = await fetchFooter();
   return (
     <html lang='sv'>
-      <body className={`${domine.variable} ${manrope.variable}`}>
+      <body
+        className={`${domine.variable} ${manrope.variable} ${kumbhSans.variable}`}
+      >
         <Navbar />
         <div className='bgImageWrapper'>
           <Image

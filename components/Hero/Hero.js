@@ -1,17 +1,6 @@
 'use client';
 import Link from 'next/link';
 
-/**
- * Hero – single video background, mobile-friendly
- *
- * Props:
- *  - src: string (video source URL)
- *  - poster: string (fallback image URL)
- *  - title: string (optional heading text)
- *  - subtitle: string (optional subheading text)
- *  - ctaText: string (optional button text)
- *  - ctaHref: string (optional link URL)
- */
 export default function Hero({
   src = '/assets/hero.mp4',
   poster = '/assets/hero-poster.jpg',
@@ -33,13 +22,9 @@ export default function Hero({
           poster={poster}
         >
           <source src={src} type='video/mp4' />
-          {/* Add an additional WebM source if you have it */}
-          {/* <source src="/assets/hero.webm" type="video/webm" /> */}
           Your browser does not support the video tag.
         </video>
-        {/* Fallback background using poster for reduce-motion or if video fails */}
         <div className='posterFallback' aria-hidden='true' />
-        {/* Overlay to ensure text contrast */}
         <div className='overlay' aria-hidden='true' />
       </div>
 

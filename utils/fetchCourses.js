@@ -82,3 +82,21 @@ export const fetchEventBySlug = async (slug) => {
     return { data: null, error: 'Kunde inte hämta eventet.', isLoading: false };
   }
 };
+
+//Fetch the earliest 5 courses
+export const fetchUpcomingCourses = async () => {
+  try {
+    const { data: courses } = await fetchCourses();
+
+    if (!courses) return { data: [] };
+
+    const sorted = courses.sort(
+      (a, b) => new Date(a.eventDateTime[0]) - new Date(b.eventDateTime[0])
+    );
+
+    return { data: sorted.slice(0, 5) };
+  } catch (error) {
+    console.error('Error fetching upcoming courses:', error);
+    return { data: null };
+  }
+};

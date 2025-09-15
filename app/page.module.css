@@ -1,10 +1,26 @@
 .intro {
-  max-width: 900px;
-  margin: 0 auto 5rem auto;
-  padding: 0 2%;
   line-height: 2rem;
-  text-align: center;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem 3rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.list li {
+  padding: 0.25rem 0;
+  font-weight: 700;
+}
+.list li:last-of-type {
+  padding: 0.25rem 0;
+  font-weight: 500;
 }
 
 .dawning {
@@ -23,5 +39,15 @@
     gap: 1rem;
     align-items: flex-start;
     justify-content: space-around;
+  }
+
+  .intro {
+    flex-direction: row;
+    gap: 6rem;
+    justify-content: center;
+  }
+
+  .introText {
+    max-width: 800px;
   }
 }
