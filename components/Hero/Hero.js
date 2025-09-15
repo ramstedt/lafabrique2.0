@@ -1,39 +1,39 @@
-'use client';
-import Link from 'next/link';
+"use client";
+import Link from "next/link";
 
 export default function Hero({
-  src = '/assets/hero.mp4',
-  poster = '/assets/hero-poster.jpg',
-  title = '',
-  subtitle = '',
-  ctaText = '',
-  ctaHref = '#',
+  src = "/assets/hero.mp4",
+  poster = "/assets/hero-poster.jpg",
+  title = "",
+  subtitle = "",
+  ctaText = "",
+  ctaHref = "#",
 }) {
   return (
-    <section className='hero' aria-label='Hero'>
-      <div className='mediaWrap'>
+    <section className="hero" aria-label="Hero">
+      <div className="mediaWrap">
         <video
-          className='video'
+          className="video"
           autoPlay
           muted
           loop
           playsInline
-          preload='metadata'
+          preload="metadata"
           poster={poster}
         >
-          <source src={src} type='video/mp4' />
+          <source src={src} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        <div className='posterFallback' aria-hidden='true' />
-        <div className='overlay' aria-hidden='true' />
+        <div className="posterFallback" aria-hidden="true" />
+        <div className="overlay" aria-hidden="true" />
       </div>
 
       {(title || subtitle || ctaText) && (
-        <div className='content'>
-          {title && <h1 className='title'>{title}</h1>}
-          {subtitle && <p className='subtitle'>{subtitle}</p>}
+        <div className="content">
+          {title && <h1 className="title">{title}</h1>}
+          {subtitle && <p className="subtitle">{subtitle}</p>}
           {ctaText && (
-            <Link href={ctaHref} className='cta'>
+            <Link href={ctaHref} className="cta">
               {ctaText}
             </Link>
           )}
@@ -43,8 +43,8 @@ export default function Hero({
       <style jsx>{`
         .hero {
           position: relative;
-          width: 100%;
-          min-height: 60vh;
+          width: 100vw;
+          min-height: 50vh;
           display: grid;
           place-items: center;
           overflow: hidden;
@@ -64,7 +64,7 @@ export default function Hero({
         .posterFallback {
           position: absolute;
           inset: 0;
-          background-image: url('${'${poster}'}');
+          background-image: url("${"${poster}"}");
           background-size: cover;
           background-position: center;
           opacity: 0;
@@ -116,12 +116,12 @@ export default function Hero({
 
         @media (min-width: 768px) {
           .hero {
-            min-height: 75vh;
+            min-height: 50vh;
           }
         }
         @media (min-width: 1280px) {
           .hero {
-            min-height: 88vh;
+            min-height: 60vh;
           }
         }
 
