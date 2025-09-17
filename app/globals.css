@@ -71,7 +71,16 @@ main {
   grid-template-columns: 4% 1fr 4%;
   grid-auto-rows: auto;
   width: 100%;
+  max-width: 1440px;
   row-gap: 3rem;
+}
+
+section {
+  max-width: 1440px;
+}
+
+section:first-of-type {
+  max-width: 100vw;
 }
 
 main > * {
@@ -89,7 +98,7 @@ main > * {
 .Teckning,
 .Keramik,
 .Workshop {
-  background-image: url('/assets/001-wrinkled-wall.png');
+  background-image: url("/assets/001-wrinkled-wall.png");
   background-size: repeat;
   background-repeat: repeat;
   background-blend-mode: multiply;

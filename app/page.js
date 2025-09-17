@@ -1,25 +1,11 @@
 import styles from './page.module.css';
 import Hero from '@/components/Hero/Hero';
-import { fetchLandingPage } from '@/utils/fetchLandingPage';
-import { fetchEvents } from '@/utils/fetchEvents';
-import { Dawning_of_a_New_Day } from 'next/font/google';
-import imageUrlBuilder from '@sanity/image-url';
-import { client } from '@/sanity/sanity';
-import InfoCard from '@/components/InfoCard/InfoCard';
-import ContentBlock from '@/components/ContentBlock/ContentBlock';
-import EventPoster from '@/components/EventPoster/EventPoster';
-import Link from 'next/link';
+
 import UpcomingCourses from '@/components/UpcomingCourses/UpcomingCourses';
 
-const builder = imageUrlBuilder(client);
-const urlFor = (source) => builder.image(source).url();
-
 export default async function Home() {
-  const { landing } = await fetchLandingPage();
-  const { events } = await fetchEvents();
-
   return (
-    <>
+    <main>
       <Hero
         src='/assets/hero.mp4'
         poster='/assets/hero-poster.jpg'
@@ -75,6 +61,6 @@ export default async function Home() {
         </div>
       </div>
       <UpcomingCourses />
-    </>
+    </main>
   );
 }

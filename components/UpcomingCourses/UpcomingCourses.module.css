@@ -11,11 +11,16 @@
   position: relative;
   overflow: hidden;
   isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
 }
 
 .heading {
   position: relative;
   z-index: 5;
+  align-self: flex-start;
 }
 .scroller {
   display: grid;

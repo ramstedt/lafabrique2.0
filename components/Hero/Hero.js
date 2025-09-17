@@ -44,8 +44,8 @@ export default function Hero({
         .hero {
           margin-top: 65px;
           position: relative;
-          width: 100%;
-          min-height: 60vh;
+          width: 100vw;
+          min-height: 50vh;
           display: grid;
           place-items: center;
           overflow: hidden;
@@ -65,7 +65,7 @@ export default function Hero({
         .posterFallback {
           position: absolute;
           inset: 0;
-          background-image: url('${'${poster}'}');
+          background-image: url("${'${poster}'}");
           background-size: cover;
           background-position: center;
           opacity: 0;
@@ -123,7 +123,7 @@ export default function Hero({
         }
         @media (min-width: 1280px) {
           .hero {
-            min-height: 88vh;
+            min-height: 60vh;
           }
         }
 
