@@ -32,6 +32,24 @@
   align-items: center;
 }
 
+.textBlockWrapper {
+  background-color: #1f1918;
+  grid-column: 1 / -1;
+  padding: 2rem;
+}
+
+.textBlock {
+  width: fit-content;
+  color: #f1e8de;
+  text-align: center;
+  font-size: 1.5rem;
+  font-style: italic;
+  margin: auto;
+}
+.name {
+  text-align: right;
+}
+
 @media screen and (min-width: 768px) {
   .infoCardsWrapper {
     flex-direction: row;
@@ -49,5 +67,9 @@
 
   .introText {
     max-width: 800px;
+  }
+  .textBlockWrapper {
+    padding-top: 5rem;
+    padding-bottom: 3rem;
   }
 }

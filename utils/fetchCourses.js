@@ -84,9 +84,11 @@ export const fetchEventBySlug = async (slug) => {
 };
 
 //Fetch the earliest 5 courses
-export const fetchUpcomingCourses = async () => {
+export const fetchUpcomingCourses = async (prefetchedCourses) => {
   try {
-    const { data: courses } = await fetchCourses();
+    let courses = Array.isArray(prefetchedCourses)
+      ? prefetchedCourses
+      : (await fetchCourses()).data;
 
     if (!courses) return { data: [] };
 
@@ -97,6 +99,31 @@ export const fetchUpcomingCourses = async () => {
     return { data: sorted.slice(0, 5) };
   } catch (error) {
     console.error('Error fetching upcoming courses:', error);
+    return { data: null };
+  }
+};
+
+// Pure filter: keep only courses with exactly one eventDateTime
+export const filterSingleDateCourses = (courses = []) => {
+  if (!Array.isArray(courses)) return [];
+  return courses.filter(
+    (course) =>
+      Array.isArray(course?.eventDateTime) && course.eventDateTime.length === 1
+  );
+};
+
+//Fetch courses that only have a single eventDateTime
+export const fetchSingleDateCourses = async (prefetchedCourses) => {
+  try {
+    let courses = Array.isArray(prefetchedCourses)
+      ? prefetchedCourses
+      : (await fetchCourses()).data;
+
+    if (!courses) return { data: [] };
+
+    return { data: filterSingleDateCourses(courses) };
+  } catch (error) {
+    console.error('Error fetching single date courses:', error);
     return { data: null };
   }
 };

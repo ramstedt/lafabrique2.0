@@ -37,12 +37,10 @@ export default async function Home() {
           Majorna
           {/* </span> */}. Här möts konstnärer och{' '}
           {/* <span className={`${dawning.className} ${styles.dawning}`}> */}
-          kreativa själar
-          {/* </span>{' '} */}
+          kreativa själar {/* </span>{' '} */}
           för att utforska{' '}
           {/* <span className={`${dawning.className} ${styles.dawning}`}> */}
-          måleri och keramik
-          {/* </span>{' '} */}i en{' '}
+          måleri och keramik {/* </span>{' '} */}i en{' '}
           {/* <span className={`${dawning.className} ${styles.dawning}`}> */}
           inspirerande miljö
           {/* </span> */}. Vår ateljé är en plats där du kan skapa fritt,{' '}
@@ -66,6 +64,14 @@ export default async function Home() {
             <li>Events</li>
             <li>... Och mycket mer!</li>
           </ul>
+        </div>
+      </div>
+      <div className={styles.textBlockWrapper}>
+        <div className={styles.textBlock}>
+          “Varje barn är en konstnär. Problemet är att förbli en när man blir
+          vuxen.” <br />
+          <br />
+          <div className={styles.name}>- Pablo Picasso</div>
         </div>
       </div>
       <UpcomingCourses />

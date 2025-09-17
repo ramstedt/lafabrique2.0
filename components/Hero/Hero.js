@@ -42,6 +42,7 @@ export default function Hero({
 
       <style jsx>{`
         .hero {
+          margin-top: 65px;
           position: relative;
           width: 100%;
           min-height: 60vh;
@@ -116,6 +117,7 @@ export default function Hero({
 
         @media (min-width: 768px) {
           .hero {
+            margin-top: 110px
             min-height: 75vh;
           }
         }

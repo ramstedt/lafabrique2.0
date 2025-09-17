@@ -61,103 +61,148 @@ export default function Navbar() {
 
   return (
     <>
-      <header className={`${styles.navbar} ${hidden ? styles.hidden : ''}`}>
-        <div className={styles.container}>
-          <Link href='/' className={styles.logo}>
-            La Fabrique
-          </Link>
-          <button className={styles.hamburger} onClick={toggleMenu}>
-            <Image
-              src='/icons/menuicon.webp'
-              alt='open menu'
-              width={30}
-              height={30}
-            />
-          </button>
-        </div>
+      <div className={styles.mobileNavbar}>
+        <header className={`${styles.navbar} ${hidden ? styles.hidden : ''}`}>
+          <div className={styles.container}>
+            <Link href='/' className={styles.logo}>
+              La Fabrique
+            </Link>
+            <button className={styles.hamburger} onClick={toggleMenu}>
+              <Image
+                src='/icons/menuicon.webp'
+                alt='open menu'
+                width={30}
+                height={30}
+              />
+            </button>
+          </div>
 
-        <nav className={`${styles.menu} ${menuOpen ? styles.open : ''}`}>
-          <button onClick={toggleMenu} className={styles.closeMenu}>
-            <Image
-              src='/icons/x.webp'
-              alt='close menu'
-              width={30}
-              height={30}
-            />
-          </button>
-          <ul>
-            <li className={styles.menuItem}>
-              <Link href='/katalog' onClick={toggleMenu}>
-                Kurskatalog
-              </Link>
-              <svg
-                viewBox='0 0 500 150'
-                preserveAspectRatio='none'
-                xmlns='http://www.w3.org/2000/svg'
-              >
-                <path
-                  fill='none'
-                  d='M325,18C228.7-8.3,118.5,8.3,78,21C22.4,38.4,4.6,54.6,5.6,77.6c1.4,32.4,52.2,54,142.6,63.7 
+          <nav className={`${styles.menu} ${menuOpen ? styles.open : ''}`}>
+            <button onClick={toggleMenu} className={styles.closeMenu}>
+              <Image
+                src='/icons/x.webp'
+                alt='close menu'
+                width={30}
+                height={30}
+              />
+            </button>
+            <ul>
+              <li className={styles.menuItem}>
+                <Link href='/katalog' onClick={toggleMenu}>
+                  Kurskatalog
+                </Link>
+                <svg
+                  viewBox='0 0 500 150'
+                  preserveAspectRatio='none'
+                  xmlns='http://www.w3.org/2000/svg'
+                >
+                  <path
+                    fill='none'
+                    d='M325,18C228.7-8.3,118.5,8.3,78,21C22.4,38.4,4.6,54.6,5.6,77.6c1.4,32.4,52.2,54,142.6,63.7 
        c66.2,7.1,212.2,7.5,273.5-8.3c64.4-16.6,104.3-57.6,33.8-98.2C386.7-4.9,179.4-1.4,126.3,20.7'
-                />
-              </svg>
-            </li>
-            <li className={styles.menuItem}>
-              <Link href='/hyra' onClick={toggleMenu}>
-                Hyra för skapande
-              </Link>
-              <svg
-                viewBox='0 0 500 150'
-                preserveAspectRatio='none'
-                xmlns='http://www.w3.org/2000/svg'
-              >
-                <path
-                  fill='none'
-                  d='M325,18C228.7-8.3,118.5,8.3,78,21C22.4,38.4,4.6,54.6,5.6,77.6c1.4,32.4,52.2,54,142.6,63.7 
+                  />
+                </svg>
+              </li>
+              <li className={styles.menuItem}>
+                <Link href='/hyra' onClick={toggleMenu}>
+                  Hyra för skapande
+                </Link>
+                <svg
+                  viewBox='0 0 500 150'
+                  preserveAspectRatio='none'
+                  xmlns='http://www.w3.org/2000/svg'
+                >
+                  <path
+                    fill='none'
+                    d='M325,18C228.7-8.3,118.5,8.3,78,21C22.4,38.4,4.6,54.6,5.6,77.6c1.4,32.4,52.2,54,142.6,63.7 
        c66.2,7.1,212.2,7.5,273.5-8.3c64.4-16.6,104.3-57.6,33.8-98.2C386.7-4.9,179.4-1.4,126.3,20.7'
-                />
-              </svg>
-            </li>
-            <li className={styles.menuItem}>
-              <Link href='/hyra-event' onClick={toggleMenu}>
-                Hyra för Event
-              </Link>
-              <svg
-                viewBox='0 0 500 150'
-                preserveAspectRatio='none'
-                xmlns='http://www.w3.org/2000/svg'
-              >
-                <path
-                  fill='none'
-                  d='M325,18C228.7-8.3,118.5,8.3,78,21C22.4,38.4,4.6,54.6,5.6,77.6c1.4,32.4,52.2,54,142.6,63.7 
+                  />
+                </svg>
+              </li>
+              <li className={styles.menuItem}>
+                <Link href='/hyra-event' onClick={toggleMenu}>
+                  Hyra för Event
+                </Link>
+                <svg
+                  viewBox='0 0 500 150'
+                  preserveAspectRatio='none'
+                  xmlns='http://www.w3.org/2000/svg'
+                >
+                  <path
+                    fill='none'
+                    d='M325,18C228.7-8.3,118.5,8.3,78,21C22.4,38.4,4.6,54.6,5.6,77.6c1.4,32.4,52.2,54,142.6,63.7 
        c66.2,7.1,212.2,7.5,273.5-8.3c64.4-16.6,104.3-57.6,33.8-98.2C386.7-4.9,179.4-1.4,126.3,20.7'
-                />
-              </svg>
-            </li>
-            <li className={styles.menuItem}>
-              <Link href='/kreatorer' onClick={toggleMenu}>
-                Kreatörer
-              </Link>
-              <svg
-                viewBox='0 0 500 150'
-                preserveAspectRatio='none'
-                xmlns='http://www.w3.org/2000/svg'
-              >
-                <path
-                  fill='none'
-                  d='M325,18C228.7-8.3,118.5,8.3,78,21C22.4,38.4,4.6,54.6,5.6,77.6c1.4,32.4,52.2,54,142.6,63.7 
+                  />
+                </svg>
+              </li>
+              <li className={styles.menuItem}>
+                <Link href='/kreatorer' onClick={toggleMenu}>
+                  Kreatörer
+                </Link>
+                <svg
+                  viewBox='0 0 500 150'
+                  preserveAspectRatio='none'
+                  xmlns='http://www.w3.org/2000/svg'
+                >
+                  <path
+                    fill='none'
+                    d='M325,18C228.7-8.3,118.5,8.3,78,21C22.4,38.4,4.6,54.6,5.6,77.6c1.4,32.4,52.2,54,142.6,63.7 
        c66.2,7.1,212.2,7.5,273.5-8.3c64.4-16.6,104.3-57.6,33.8-98.2C386.7-4.9,179.4-1.4,126.3,20.7'
-                />
-              </svg>
-            </li>
-          </ul>
-        </nav>
+                  />
+                </svg>
+              </li>
+            </ul>
+          </nav>
 
-        {menuOpen && (
-          <div className={styles.overlay} onClick={toggleMenu}></div>
-        )}
-        <div className={styles.line}></div>
-      </header>
+          {menuOpen && (
+            <div className={styles.overlay} onClick={toggleMenu}></div>
+          )}
+          <div className={styles.line}></div>
+        </header>
+      </div>
+      <div className={styles.desktopNavbar}>
+        <header className={styles.navbar}>
+          <div className={styles.desktopContainer}>
+            <Link href='/' className={styles.logo}>
+              La Fabrique
+            </Link>
+            <nav className={styles.desktopMenu}>
+              <ul>
+                <li>
+                  <Link href='/katalog'>Om Oss</Link>
+                </li>
+                <li className={styles.hasDropdown}>
+                  <button
+                    className={styles.dropdownToggle}
+                    aria-haspopup='true'
+                    aria-expanded='false'
+                  >
+                    Hyra
+                  </button>
+                  <ul className={styles.dropdown} role='menu'>
+                    <li role='none'>
+                      <Link href='/hyra' role='menuitem'>
+                        Hyra för skapande
+                      </Link>
+                    </li>
+                    <li role='none'>
+                      <Link href='/hyra-event' role='menuitem'>
+                        Hyra för Event
+                      </Link>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <Link href='/kreatorer'>Kreatörer</Link>
+                </li>
+                <li>
+                  <Link href='/kreatorer'>Kontakt</Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </header>
+      </div>
     </>
   );
 }
