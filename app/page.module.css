@@ -6,6 +6,11 @@
   gap: 1rem;
 }
 
+.landingPage {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 .list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

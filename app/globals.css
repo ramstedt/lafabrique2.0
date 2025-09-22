@@ -49,11 +49,24 @@ h2 {
   font-size: 1.5rem;
 }
 
+input,
+label {
+  cursor: pointer;
+}
+
+label {
+  display: block;
+}
+
 body,
 p,
 span,
 a {
   font-family: var(--font-body) !important;
+}
+
+p {
+  line-height: 1.4rem;
 }
 
 h3 {
@@ -67,13 +80,13 @@ button {
 }
 
 main {
-  margin-top: 70px;
   display: grid;
   grid-template-columns: 4% 1fr 4%;
   grid-auto-rows: auto;
   width: 100%;
   max-width: 1440px;
   row-gap: 3rem;
+  margin: 70px auto auto auto;
 }
 
 section {
@@ -88,6 +101,11 @@ main > * {
   grid-column: 2;
 }
 
+.ingress {
+  font-size: 1.1rem;
+  padding-bottom: 1rem;
+}
+
 .fullRow {
   grid-column: 1 / -1;
 }
@@ -99,7 +117,7 @@ main > * {
 .Teckning,
 .Keramik,
 .Workshop {
-  background-image: url('/assets/001-wrinkled-wall.png');
+  background-image: url("/assets/001-wrinkled-wall.png");
   background-size: repeat;
   background-repeat: repeat;
   background-blend-mode: multiply;
