@@ -40,7 +40,9 @@
 .textBlockWrapper {
   background-color: #1f1918;
   grid-column: 1 / -1;
+  width: 100vw;
   padding: 2rem;
+  margin-left: calc(-50vw + 50%);
 }
 
 .textBlock {

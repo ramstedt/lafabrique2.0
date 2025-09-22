@@ -237,7 +237,7 @@ export default function UpcomingCourses({ events = [] }) {
       </section>
 
       <div className={styles.buttonWrapper}>
-        <Link className={styles.button} href="/kurskatalog">
+        <Link className={styles.button} href="/katalog">
           Besök hela kurskatalogen
         </Link>
       </div>

@@ -5,8 +5,25 @@
   display: grid;
   place-items: center;
   overflow: hidden;
-  grid-area: 1 / 1 / 2 / 4;
+  grid-column: 1 / -1;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
 }
+
+.heroImage {
+  position: relative;
+  width: 100vw;
+  min-height: 20vh;
+  overflow: hidden;
+  grid-column: 1 / -1;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
+.heroImage img {
+  object-fit: cover;
+}
+
 .mediaWrap {
   position: absolute;
   inset: 0;
@@ -79,6 +96,9 @@
 @media (min-width: 1280px) {
   .hero {
     min-height: 60vh;
+  }
+  .heroImage {
+    min-height: 40vh;
   }
 }
 

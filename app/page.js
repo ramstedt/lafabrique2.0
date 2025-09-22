@@ -6,12 +6,13 @@ import UpcomingCourses from "@/components/UpcomingCourses/UpcomingCourses";
 export default async function Home() {
   const { data: events } = await fetchCourses();
   return (
-    <main className={styles.landingPage}>
+    <main>
       <Hero
         src="/assets/hero.mp4"
         title="KONSTKURSER FÖR ALLA"
         subtitle="Kreativ gemenskap i Majorna"
         ctaText="Kurser, workshops, möhippa, företagsevent med mera"
+        type="video"
       />
       <div className={styles.intro}>
         <div className={styles.introText}>

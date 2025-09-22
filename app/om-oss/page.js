@@ -2,12 +2,14 @@ import React from "react";
 import { fetchArtists } from "@/utils/fetchArtists";
 import ArtistCard from "@/components/ArtistCard/ArtistCard";
 import styles from "./kreatorer.module.css";
+import Hero from "@/components/Hero/Hero";
 
 export default async function Kreatorer() {
   const { data } = await fetchArtists();
 
   return (
     <main>
+      <Hero src="/images/about.png" alt="alt text" type="image" />
       <div>
         <h1>Om oss</h1>
         <p>

@@ -18,6 +18,9 @@
   transition: transform 0.3s ease-in-out;
   z-index: 1000;
   box-sizing: border-box;
+  border-style: solid;
+  border-color: #1f191849;
+  border-width: 0px 0px 1px 0px;
 }
 
 /* Desktop dropdown */
@@ -38,7 +41,7 @@
 
 /* Triangle indicator */
 .dropdownToggle::after {
-  content: '\25BC'; /* ▼ */
+  content: "\25BC"; /* ▼ */
   font-size: 0.8em;
   line-height: 1;
   transform: translateY(1px);
@@ -74,7 +77,8 @@
 }
 
 .navbar nav a:hover {
-  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 @media (max-width: 767px) {

@@ -1,15 +1,21 @@
 .upcomingCourses {
   max-width: 100vw;
 }
-
 .courseImgWrapper {
   position: relative;
+  overflow: hidden; /* keep the zoomed image clipped */
+  width: 300px; /* match your intended width */
+  height: 400px; /* match your intended height */
 }
 
 .courseImgWrapper img {
-  object-fit: cover;
+  object-fit: cover; /* image fills wrapper nicely */
+  transition: transform 0.4s ease; /* smooth zoom */
 }
 
+.courseImgWrapper img:hover {
+  transform: scale(1.1); /* zoom in 10% */
+}
 .wrapper {
   margin-bottom: 2rem;
   position: relative;
@@ -40,6 +46,7 @@
   cursor: grab;
   max-width: 100%;
   touch-action: pan-y pan-x;
+
   will-change: scroll-position;
 }
 .scroller::-webkit-scrollbar {
@@ -66,7 +73,7 @@
   font-family: var(--font-domine, serif);
   font-size: 1.1rem;
 }
-.link {
+.link:hover {
   color: inherit;
   text-decoration: underline;
   text-underline-offset: 2px;

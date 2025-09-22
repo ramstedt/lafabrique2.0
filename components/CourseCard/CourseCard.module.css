@@ -87,24 +87,24 @@
 
 .button {
   border: none;
-  background: #56482d;
+  background: #1f1918;
   padding: 4px 8px;
   font-family: inherit;
   font-weight: 500;
   margin-top: 0.5rem;
   color: #fbf8ef;
-  border: 1px #302819;
-  border-style: solid dotted solid dotted;
-  border-radius: 50px 500px 20px 180px / 400px 30px 255px 20px;
+  border: 1px #1f1918;
+  border-style: solid;
 }
 
 .button:hover {
-  color: #56482d;
+  color: #302819;
   background: #fbf8ef93;
 }
 
 @media screen and (min-width: 1024px) {
   .wrapper {
+    margin-top: 60px;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(6, auto);
     align-items: start;

@@ -2,7 +2,7 @@
   display: block;
   width: fit-content;
   margin: auto;
-  color: #504126;
+  color: #1f1918;
   background: #f4eddb;
   text-transform: uppercase;
   font-size: 0.75rem;
@@ -13,6 +13,6 @@
 }
 
 .wrapper:hover {
-  background: #504126;
+  background: #302819;
   color: #f4eddb;
 }

@@ -19,3 +19,8 @@
 .imageWrapper img {
   object-fit: cover;
 }
+
+.landingPage {
+  margin-left: 0;
+  margin-right: 0;
+}

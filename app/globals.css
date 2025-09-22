@@ -11,6 +11,7 @@ body {
   letter-spacing: 0.11rem;
   margin: 0;
   color: #1f1918;
+  scroll-behavior: smooth;
 }
 .margin {
   margin: 0 2% 0 2%;
@@ -110,59 +111,6 @@ main > * {
   grid-column: 1 / -1;
 }
 
-/* categories */
-
-.Oljemaleri,
-.Akvarell,
-.Teckning,
-.Keramik,
-.Workshop {
-  background-image: url("/assets/001-wrinkled-wall.png");
-  background-size: repeat;
-  background-repeat: repeat;
-  background-blend-mode: multiply;
-}
-
-.Oljemaleri,
-.Akvarell,
-.Teckning {
-  background-color: rgba(163, 177, 138, 0.5) !important;
-}
-
-.Keramik {
-  background-color: rgba(225, 169, 85, 0.5) !important;
-}
-
-.Workshop {
-  background-color: rgba(184, 80, 66, 0.5) !important;
-}
-
-.bgImageWrapper {
-  position: absolute;
-  width: 100%;
-  top: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  align-items: flex-start;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-
-.bgImageWrapper:has(+ .swiper) {
-  top: 950px;
-}
-
-.bgImage {
-  max-width: 500px;
-  height: auto;
-  opacity: 0.2;
-  mix-blend-mode: multiply;
-  pointer-events: none;
-}
-
 ul {
   list-style-type: none;
   padding: 0;
@@ -175,15 +123,6 @@ button {
   letter-spacing: 0.1rem;
   font-size: 1rem;
   min-width: fit-content;
-}
-
-@media screen and (min-width: 768px) {
-  main {
-    margin-top: 110px;
-  }
-  .bgImageWrapper {
-    flex-direction: row;
-  }
 }
 
 .ice {

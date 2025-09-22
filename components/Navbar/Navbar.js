@@ -177,7 +177,7 @@ export default function Navbar() {
                   <Link href="/katalog">Kurskatalog</Link>
                 </li>
                 <li>
-                  <Link href="/kontakt">Kontakt</Link>
+                  <Link href="#kontakt">Kontakt</Link>
                 </li>
               </ul>
             </nav>
