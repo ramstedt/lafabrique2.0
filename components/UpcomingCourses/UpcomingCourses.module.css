@@ -1,3 +1,7 @@
+.upcomingCourses {
+  max-width: 100vw;
+}
+
 .courseImgWrapper {
   position: relative;
 }
@@ -90,7 +94,6 @@
   /* background: linear-gradient(to left, rgba(255, 255, 255, 0), #f5f5ef); */
 }
 
-/* Arrows */
 .arrow {
   position: absolute;
   top: 50%;
@@ -115,10 +118,9 @@
   right: 4px;
 }
 
-@media (hover: hover) {
-  .arrow:hover {
-    background: #fff;
-  }
+.arrow:hover {
+  background: #fff;
+  color: #1f1918;
 }
 
 @media (max-width: 480px) {
@@ -135,7 +137,6 @@
   }
 }
 
-/* Reduce motion users: no visual hint needed */
 @media (prefers-reduced-motion: reduce) {
   .scroller {
     scroll-behavior: auto;
@@ -154,7 +155,6 @@
   scroll-snap-type: none;
 }
 
-/* Disable snapping on touch / coarse pointers */
 @media (hover: none), (pointer: coarse) {
   .scroller {
     scroll-snap-type: none;

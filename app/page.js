@@ -1,44 +1,31 @@
-import styles from './page.module.css';
-import Hero from '@/components/Hero/Hero';
-
-import UpcomingCourses from '@/components/UpcomingCourses/UpcomingCourses';
+import styles from "./page.module.css";
+import Hero from "@/components/Hero/Hero";
+import { fetchCourses } from "@/utils/fetchCourses";
+import UpcomingCourses from "@/components/UpcomingCourses/UpcomingCourses";
 
 export default async function Home() {
+  const { data: events } = await fetchCourses();
   return (
-    <main>
+    <main className={styles.landingPage}>
       <Hero
-        src='/assets/hero.mp4'
-        poster='/assets/hero-poster.jpg'
-        title='KONSTKURSER FÖR ALLA'
-        subtitle='Kreativ gemenskap i Majorna'
-        ctaText='Kurser, workshops, möhippa, företagsevent med mera'
-        ctaHref='/kurser'
+        src="/assets/hero.mp4"
+        title="KONSTKURSER FÖR ALLA"
+        subtitle="Kreativ gemenskap i Majorna"
+        ctaText="Kurser, workshops, möhippa, företagsevent med mera"
       />
       <div className={styles.intro}>
         <div className={styles.introText}>
           <h2>Vad vi erbjuder</h2>
-          Välkommen att bli en del av vårt konstnärliga kollektiv, <br />
-          en ateljé i hjärtat av{' '}
-          {/* <span className={`${dawning.className} ${styles.dawning}`}> */}
-          Majorna
-          {/* </span> */}. Här möts konstnärer och{' '}
-          {/* <span className={`${dawning.className} ${styles.dawning}`}> */}
-          kreativa själar {/* </span>{' '} */}
-          för att utforska{' '}
-          {/* <span className={`${dawning.className} ${styles.dawning}`}> */}
-          måleri och keramik {/* </span>{' '} */}i en{' '}
-          {/* <span className={`${dawning.className} ${styles.dawning}`}> */}
-          inspirerande miljö
-          {/* </span> */}. Vår ateljé är en plats där du kan skapa fritt,{' '}
-          {/* <span className={`${dawning.className} ${styles.dawning}`}> */}
-          hyra arbetsyta {/* </span> */}
-          eller delta i{' '}
-          {/* <span className={`${dawning.className} ${styles.dawning}`}> */}
-          kurser och workshops, {/* </span> */} oavsett om du är nybörjare eller
-          erfaren. Med en varm och gemenskaplig atmosfär erbjuder vi en{' '}
-          {/* <span className={`${dawning.className} ${styles.dawning}`}> */}
-          kreativ fristad {/* </span>{' '} */}
-          där idéer får liv och händerna får arbeta. <br />
+          <p>
+            Välkommen att bli en del av vårt konstnärliga kollektiv, en ateljé i
+            hjärtat av Majorna. Här möts konstnärer och kreativa själar för att
+            utforska måleri och keramik i en inspirerande miljö.
+            <br />
+            Vår ateljé är en plats där du kan skapa fritt, hyra arbetsyta eller
+            delta i kurser och workshops, oavsett om du är nybörjare eller
+            erfaren. Med en varm och gemenskaplig atmosfär erbjuder vi en
+            kreativ fristad där idéer får liv och händerna får arbeta.
+          </p>
         </div>
         <div>
           <ul className={styles.list}>
@@ -60,7 +47,7 @@ export default async function Home() {
           <div className={styles.name}>- Pablo Picasso</div>
         </div>
       </div>
-      <UpcomingCourses />
+      <UpcomingCourses events={events ?? []} />;
     </main>
   );
 }

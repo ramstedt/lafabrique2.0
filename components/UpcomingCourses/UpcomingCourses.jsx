@@ -1,39 +1,48 @@
-'use client';
-import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
-import { fetchUpcomingCourses } from '@/utils/fetchCourses';
-import Image from 'next/image';
-import imageUrlBuilder from '@sanity/image-url';
-import { client } from '@/sanity/sanity';
-import styles from './UpcomingCourses.module.css';
-import { GoChevronRight, GoChevronLeft } from 'react-icons/go';
+"use client";
+
+import { useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import imageUrlBuilder from "@sanity/image-url";
+import { client } from "@/sanity/sanity";
+import styles from "./UpcomingCourses.module.css";
+import { GoChevronRight, GoChevronLeft } from "react-icons/go";
 
 const builder = imageUrlBuilder(client);
 const urlFor = (source) => builder.image(source).url();
 
-export default function UpcomingCourses() {
-  const [data, setData] = useState([]);
+export default function UpcomingCourses({ events = [] }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  const data = useMemo(() => {
+    const sorted = Array.isArray(events)
+      ? [...events].sort((a, b) => (a.firstDate || 0) - (b.firstDate || 0))
+      : [];
+    return sorted.slice(0, 5);
+  }, [events]);
+
   const scrollerRef = useRef(null);
   const isDraggingRef = useRef(false);
   const startXRef = useRef(0);
   const startScrollLeftRef = useRef(0);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
-  const [showRightArrow, setShowRightArrow] = useState(true);
+  const [showRightArrow, setShowRightArrow] = useState(false);
 
   const updateArrowsFromEl = (el) => {
     if (!el) return;
     const canScroll = el.scrollWidth > el.clientWidth;
-
     const maxScroll = Math.max(0, el.scrollWidth - el.clientWidth);
     const ratio = maxScroll > 0 ? el.scrollLeft / maxScroll : 0;
-    const atStart = ratio <= 0.1; // <= 10% from start
-    const atEnd = ratio >= 0.9; // >= 90% to the end
+    const atStart = ratio <= 0.1;
+    const atEnd = ratio >= 0.9;
 
     setShowLeftArrow(!atStart && canScroll);
     setShowRightArrow(!atEnd && canScroll);
   };
 
   useEffect(() => {
+    if (!mounted) return;
     const el = scrollerRef.current;
     if (!el) return;
 
@@ -43,33 +52,29 @@ export default function UpcomingCourses() {
     const onScroll = () => {
       if (rafId) cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(() => updateArrowsFromEl(el));
-      // Debounced end update for momentum scrolling
       if (endTimer) clearTimeout(endTimer);
       endTimer = setTimeout(() => updateArrowsFromEl(el), 120);
     };
 
     const onResize = () => updateArrowsFromEl(el);
-
     updateArrowsFromEl(el);
 
-    el.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onResize);
+    el.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize);
     return () => {
       if (rafId) cancelAnimationFrame(rafId);
       if (endTimer) clearTimeout(endTimer);
-      el.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onResize);
+      el.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
     };
-  }, []);
+  }, [mounted]);
 
   const onPointerDown = (e) => {
     const el = scrollerRef.current;
     if (!el) return;
     isDraggingRef.current = true;
     if (e.target.setPointerCapture && e.pointerId != null) {
-      try {
-        e.target.setPointerCapture(e.pointerId);
-      } catch (_) {}
+      e.target.setPointerCapture(e.pointerId);
     }
     el.classList.add(styles.grabbing);
     el.classList.add(styles.noSnap);
@@ -99,22 +104,13 @@ export default function UpcomingCourses() {
       e.target.releasePointerCapture &&
       e.pointerId != null
     ) {
-      try {
+      {
         e.target.releasePointerCapture(e.pointerId);
-      } catch (_) {}
+      }
     }
     const elNow = scrollerRef.current;
-    if (elNow) {
-      updateArrowsFromEl(elNow);
-    }
+    if (elNow) updateArrowsFromEl(elNow);
   };
-
-  useEffect(() => {
-    (async () => {
-      const { data } = await fetchUpcomingCourses();
-      setData(data ?? []);
-    })();
-  }, []);
 
   const scrollByAmount = (dir = 1) => {
     const el = scrollerRef.current;
@@ -123,7 +119,7 @@ export default function UpcomingCourses() {
     const cards = Array.from(el.querySelectorAll(`.${styles.card}`));
     if (!cards.length) return;
 
-    const padLeft = parseFloat(getComputedStyle(el).paddingLeft || '0');
+    const padLeft = parseFloat(getComputedStyle(el).paddingLeft || "0");
 
     const epsilon = 2;
     const maxScroll = Math.max(0, el.scrollWidth - el.clientWidth);
@@ -158,23 +154,22 @@ export default function UpcomingCourses() {
       setShowRightArrow(true);
     }
 
-    el.scrollTo({ left: target, behavior: 'smooth' });
+    el.scrollTo({ left: target, behavior: "smooth" });
     Promise.resolve().then(() => updateArrowsFromEl(el));
     setTimeout(() => updateArrowsFromEl(el), 220);
   };
 
-  if (!data || data.length === 0) {
-    return <div></div>;
-  }
+  if (!mounted) return null;
+  if (!data || data.length === 0) return <div />;
 
   return (
     <>
-      <section className={styles.wrapper} aria-label='Kommande kurser'>
+      <section className={styles.wrapper} aria-label="Kommande kurser">
         <h2 className={styles.heading}>Kommande kurser</h2>
 
         <button
-          type='button'
-          aria-label='Scrolla vänster'
+          type="button"
+          aria-label="Scrolla vänster"
           className={`${styles.arrow} ${styles.left} ${showLeftArrow ? styles.visible : styles.hidden}`}
           onClick={() => scrollByAmount(-1)}
         >
@@ -182,8 +177,8 @@ export default function UpcomingCourses() {
         </button>
 
         <button
-          type='button'
-          aria-label='Scrolla höger'
+          type="button"
+          aria-label="Scrolla höger"
           className={`${styles.arrow} ${styles.right} ${showRightArrow ? styles.visible : styles.hidden}`}
           onClick={() => scrollByAmount(1)}
         >
@@ -212,8 +207,12 @@ export default function UpcomingCourses() {
             >
               <div className={styles.courseImgWrapper}>
                 <Image
-                  src={urlFor(course.image?.asset)}
-                  alt={course.image?.alt || course.name || 'Kursbild'}
+                  src={
+                    course.image?.asset
+                      ? urlFor(course.image.asset)
+                      : "/placeholder.png"
+                  }
+                  alt={course.image?.alt || course.name || "Kursbild"}
                   width={300}
                   height={400}
                   draggable={false}
@@ -235,14 +234,13 @@ export default function UpcomingCourses() {
             </article>
           ))}
         </div>
-        <div>
-          <div className={styles.buttonWrapper}>
-            <Link className={styles.button} href='/kurskatalog'>
-              Besök hela kurskatalogen
-            </Link>
-          </div>
-        </div>
       </section>
+
+      <div className={styles.buttonWrapper}>
+        <Link className={styles.button} href="/kurskatalog">
+          Besök hela kurskatalogen
+        </Link>
+      </div>
     </>
   );
 }

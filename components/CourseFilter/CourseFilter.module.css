@@ -4,9 +4,6 @@
   border-radius: 255px 15px 255px 15px / 15px 255px 15px 255px;
 }
 
-/***** Existing styles remain unchanged *****/
-
-/* --- Mobile trigger and modal styles --- */
 .mobileTrigger {
   display: none;
   align-items: center;
@@ -85,4 +82,22 @@
   border-radius: 6px;
   background: #fff;
   cursor: pointer;
+}
+.filters {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+}
+
+.filterLabel {
+  margin-bottom: 0.3rem;
+  margin-top: 0.5rem;
+}
+@media (min-width: 768px) {
+  .filtersContent {
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+  }
 }

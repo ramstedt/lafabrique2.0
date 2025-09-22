@@ -1,6 +1,6 @@
-import React from 'react';
-import { fetchCourses } from '@/utils/fetchCourses';
-import FilterableCatalogue from '@/components/FilterableCatalogue/FilterableCatalogue';
+import React from "react";
+import { fetchCourses } from "@/utils/fetchCourses";
+import FilterableCatalogue from "@/components/FilterableCatalogue/FilterableCatalogue";
 
 export default async function Catalogue() {
   const { data: events } = await fetchCourses();
@@ -13,5 +13,9 @@ export default async function Catalogue() {
     );
   }
 
-  return <FilterableCatalogue events={events} />;
+  return (
+    <main>
+      <FilterableCatalogue events={events} />
+    </main>
+  );
 }
