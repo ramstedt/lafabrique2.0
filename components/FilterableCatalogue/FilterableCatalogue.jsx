@@ -3,11 +3,12 @@
 import { useState, useMemo } from 'react';
 import EventFilter from '@/components/CourseFilter/CourseFilter';
 import CatalogueCard from '@/components/CatalogueCard/CatalogueCard';
-import { groupByMonth } from '@/utils/groupByMonth';
+import { groupByMonth } from '@/utils/fetchCourses';
 import styles from './FilterableCatalogue.module.css';
 
 export default function FilterableCatalogue({ events }) {
-  const [selectedCategory, setSelectedCategory] = useState('Alla');
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedMonths, setSelectedMonths] = useState([]);
 
   const processedEvents = useMemo(() => {
     return events.map((event) => ({
@@ -17,11 +18,29 @@ export default function FilterableCatalogue({ events }) {
   }, [events]);
 
   const categorizedEvents = useMemo(() => {
-    if (selectedCategory === 'Alla') return processedEvents;
-    return processedEvents.filter(
-      (event) => event.category === selectedCategory
-    );
-  }, [selectedCategory, processedEvents]);
+    let list = processedEvents;
+
+    // Category filter (empty = show all)
+    if (selectedCategories && selectedCategories.length > 0) {
+      list = list.filter((event) =>
+        selectedCategories.includes(event.category)
+      );
+    }
+
+    // Month filter (empty = show all)
+    if (selectedMonths && selectedMonths.length > 0) {
+      const fmt = new Intl.DateTimeFormat('sv-SE', {
+        month: 'long',
+        year: 'numeric',
+      });
+      list = list.filter((event) => {
+        const label = fmt.format(event.eventDateTime).toLowerCase();
+        return selectedMonths.includes(label);
+      });
+    }
+
+    return list;
+  }, [processedEvents, selectedCategories, selectedMonths]);
 
   const groupedByMonth = useMemo(
     () => groupByMonth(categorizedEvents),
@@ -31,8 +50,10 @@ export default function FilterableCatalogue({ events }) {
   return (
     <main>
       <EventFilter
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
+        selectedCategories={selectedCategories}
+        setSelectedCategories={setSelectedCategories}
+        selectedMonths={selectedMonths}
+        setSelectedMonths={setSelectedMonths}
         events={events}
       />
       {Object.keys(groupedByMonth).length > 0 ? (
@@ -50,9 +71,7 @@ export default function FilterableCatalogue({ events }) {
           </div>
         ))
       ) : (
-        <p>
-          Det finns inga planerade kurser eller i denna kategori för tillfället.
-        </p>
+        <p>Det finns inga planerade kurser just nu.</p>
       )}
     </main>
   );

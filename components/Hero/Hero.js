@@ -1,14 +1,12 @@
 'use client';
-import Link from 'next/link';
 import styles from './Hero.module.css';
 
 export default function Hero({
   src = '/assets/hero.mp4',
   poster = '/assets/hero-poster.jpg',
-  title = '',
-  subtitle = '',
-  ctaText = '',
-  ctaHref = '#',
+  title,
+  subtitle,
+  ctaText,
 }) {
   return (
     <section className={styles.hero} aria-label='Hero'>

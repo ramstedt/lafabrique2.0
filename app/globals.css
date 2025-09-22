@@ -67,6 +67,7 @@ button {
 }
 
 main {
+  margin-top: 70px;
   display: grid;
   grid-template-columns: 4% 1fr 4%;
   grid-auto-rows: auto;
@@ -98,7 +99,7 @@ main > * {
 .Teckning,
 .Keramik,
 .Workshop {
-  background-image: url("/assets/001-wrinkled-wall.png");
+  background-image: url('/assets/001-wrinkled-wall.png');
   background-size: repeat;
   background-repeat: repeat;
   background-blend-mode: multiply;
@@ -159,6 +160,9 @@ button {
 }
 
 @media screen and (min-width: 768px) {
+  main {
+    margin-top: 110px;
+  }
   .bgImageWrapper {
     flex-direction: row;
   }

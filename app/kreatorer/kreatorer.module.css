@@ -1,0 +1,22 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  justify-items: center;
+
+  justify-content: center;
+}
+
+.imageWrapper {
+  position: relative;
+  height: 40vh;
+  width: 100vw;
+  object-fit: cover;
+  place-items: center;
+  overflow: hidden;
+  grid-area: 1 / 1 / 2 / 4;
+}
+
+.imageWrapper img {
+  object-fit: cover;
+}

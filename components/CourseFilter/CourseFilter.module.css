@@ -3,3 +3,86 @@
   border-style: dotted solid solid dotted;
   border-radius: 255px 15px 255px 15px / 15px 255px 15px 255px;
 }
+
+/***** Existing styles remain unchanged *****/
+
+/* --- Mobile trigger and modal styles --- */
+.mobileTrigger {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+.filterIcon {
+  display: inline-block;
+}
+.inlineFilters {
+  display: block;
+}
+
+@media (max-width: 767px) {
+  .mobileTrigger {
+    display: inline-flex;
+  }
+  .inlineFilters {
+    display: none;
+  }
+}
+
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: #fff;
+  width: 100%;
+  max-width: 640px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  padding: 1rem;
+  max-height: 90vh;
+  overflow: auto;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.modalBody {
+  padding: 0.5rem 0;
+}
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+.closeBtn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.applyBtn,
+.clearBtn {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
