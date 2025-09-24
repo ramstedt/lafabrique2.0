@@ -3,28 +3,28 @@
 }
 .courseImgWrapper {
   position: relative;
-  overflow: hidden; /* keep the zoomed image clipped */
-  width: 300px; /* match your intended width */
-  height: 400px; /* match your intended height */
+  overflow: hidden;
+  width: 300px;
+  height: 400px;
 }
 
 .courseImgWrapper img {
-  object-fit: cover; /* image fills wrapper nicely */
-  transition: transform 0.4s ease; /* smooth zoom */
+  object-fit: cover;
+  transition: transform 0.4s ease;
 }
 
 .courseImgWrapper img:hover {
-  transform: scale(1.1); /* zoom in 10% */
+  transform: scale(1.1);
 }
 .wrapper {
-  margin-bottom: 2rem;
-  position: relative;
   overflow: hidden;
+  position: relative;
   isolation: isolate;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: auto;
+
+  margin-bottom: 2rem;
 }
 
 .heading {
@@ -46,6 +46,7 @@
   cursor: grab;
   max-width: 100%;
   touch-action: pan-y pan-x;
+  overflow: hidden;
 
   will-change: scroll-position;
 }

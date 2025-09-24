@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import imageUrlBuilder from "@sanity/image-url";
-import { client } from "@/sanity/sanity";
-import styles from "./UpcomingCourses.module.css";
-import { GoChevronRight, GoChevronLeft } from "react-icons/go";
+import { useEffect, useMemo, useRef, useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import imageUrlBuilder from '@sanity/image-url';
+import { client } from '@/sanity/sanity';
+import styles from './UpcomingCourses.module.css';
+import { GoChevronRight, GoChevronLeft } from 'react-icons/go';
 
 const builder = imageUrlBuilder(client);
 const urlFor = (source) => builder.image(source).url();
@@ -59,13 +59,13 @@ export default function UpcomingCourses({ events = [] }) {
     const onResize = () => updateArrowsFromEl(el);
     updateArrowsFromEl(el);
 
-    el.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onResize);
+    el.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onResize);
     return () => {
       if (rafId) cancelAnimationFrame(rafId);
       if (endTimer) clearTimeout(endTimer);
-      el.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onResize);
+      el.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onResize);
     };
   }, [mounted]);
 
@@ -119,7 +119,7 @@ export default function UpcomingCourses({ events = [] }) {
     const cards = Array.from(el.querySelectorAll(`.${styles.card}`));
     if (!cards.length) return;
 
-    const padLeft = parseFloat(getComputedStyle(el).paddingLeft || "0");
+    const padLeft = parseFloat(getComputedStyle(el).paddingLeft || '0');
 
     const epsilon = 2;
     const maxScroll = Math.max(0, el.scrollWidth - el.clientWidth);
@@ -154,7 +154,7 @@ export default function UpcomingCourses({ events = [] }) {
       setShowRightArrow(true);
     }
 
-    el.scrollTo({ left: target, behavior: "smooth" });
+    el.scrollTo({ left: target, behavior: 'smooth' });
     Promise.resolve().then(() => updateArrowsFromEl(el));
     setTimeout(() => updateArrowsFromEl(el), 220);
   };
@@ -164,12 +164,12 @@ export default function UpcomingCourses({ events = [] }) {
 
   return (
     <>
-      <section className={styles.wrapper} aria-label="Kommande kurser">
+      <section className={styles.wrapper} aria-label='Kommande kurser'>
         <h2 className={styles.heading}>Kommande kurser</h2>
 
         <button
-          type="button"
-          aria-label="Scrolla vänster"
+          type='button'
+          aria-label='Scrolla vänster'
           className={`${styles.arrow} ${styles.left} ${showLeftArrow ? styles.visible : styles.hidden}`}
           onClick={() => scrollByAmount(-1)}
         >
@@ -177,8 +177,8 @@ export default function UpcomingCourses({ events = [] }) {
         </button>
 
         <button
-          type="button"
-          aria-label="Scrolla höger"
+          type='button'
+          aria-label='Scrolla höger'
           className={`${styles.arrow} ${styles.right} ${showRightArrow ? styles.visible : styles.hidden}`}
           onClick={() => scrollByAmount(1)}
         >
@@ -210,9 +210,9 @@ export default function UpcomingCourses({ events = [] }) {
                   src={
                     course.image?.asset
                       ? urlFor(course.image.asset)
-                      : "/placeholder.png"
+                      : '/placeholder.png'
                   }
-                  alt={course.image?.alt || course.name || "Kursbild"}
+                  alt={course.image?.alt || course.name || 'Kursbild'}
                   width={300}
                   height={400}
                   draggable={false}
@@ -237,7 +237,7 @@ export default function UpcomingCourses({ events = [] }) {
       </section>
 
       <div className={styles.buttonWrapper}>
-        <Link className={styles.button} href="/katalog">
+        <Link className={styles.button} href='/katalog'>
           Besök hela kurskatalogen
         </Link>
       </div>

@@ -1,18 +1,18 @@
-import styles from "./page.module.css";
-import Hero from "@/components/Hero/Hero";
-import { fetchCourses } from "@/utils/fetchCourses";
-import UpcomingCourses from "@/components/UpcomingCourses/UpcomingCourses";
+import styles from './page.module.css';
+import Hero from '@/components/Hero/Hero';
+import { fetchCourses } from '@/utils/fetchCourses';
+import UpcomingCourses from '@/components/UpcomingCourses/UpcomingCourses';
 
 export default async function Home() {
   const { data: events } = await fetchCourses();
   return (
     <main>
       <Hero
-        src="/assets/hero.mp4"
-        title="KONSTKURSER FÖR ALLA"
-        subtitle="Kreativ gemenskap i Majorna"
-        ctaText="Kurser, workshops, möhippa, företagsevent med mera"
-        type="video"
+        src='/assets/hero.mp4'
+        title='KONSTKURSER FÖR ALLA'
+        subtitle='Kreativ gemenskap i Majorna'
+        ctaText='Kurser, workshops, möhippa, företagsevent med mera'
+        type='video'
       />
       <div className={styles.intro}>
         <div className={styles.introText}>
@@ -48,7 +48,7 @@ export default async function Home() {
           <div className={styles.name}>- Pablo Picasso</div>
         </div>
       </div>
-      <UpcomingCourses events={events ?? []} />;
+      <UpcomingCourses events={events ?? []} />
     </main>
   );
 }
