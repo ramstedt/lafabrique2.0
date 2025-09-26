@@ -41,7 +41,7 @@
 
 /* Triangle indicator */
 .dropdownToggle::after {
-  content: "\25BC"; /* ▼ */
+  content: '\25BC'; /* ▼ */
   font-size: 0.8em;
   line-height: 1;
   transform: translateY(1px);
@@ -162,7 +162,7 @@
   right: -550px;
   width: 315px;
   height: 100vh;
-  background-color: rgba(187, 174, 164);
+  background-color: #f5f5ef;
   /* background-color: rgba(187, 174, 164, 0.7); */
   /* background-image: url('/assets/3.png'); */
   background-size: repeat;
@@ -193,7 +193,7 @@
 
 .menu ul li a {
   text-decoration: none;
-  font-size: 18px;
+  font-size: 1rem;
   display: block;
 }
 
