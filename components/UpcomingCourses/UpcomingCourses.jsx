@@ -26,6 +26,9 @@ export default function UpcomingCourses({ events = [] }) {
   const isDraggingRef = useRef(false);
   const startXRef = useRef(0);
   const startScrollLeftRef = useRef(0);
+  const velocityRef = useRef(0);
+  const lastXRef = useRef(0);
+  const lastTRef = useRef(0);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(false);
 
@@ -80,14 +83,28 @@ export default function UpcomingCourses({ events = [] }) {
     el.classList.add(styles.noSnap);
     startXRef.current = e.clientX || (e.touches && e.touches[0]?.clientX) || 0;
     startScrollLeftRef.current = el.scrollLeft;
+    const x = e.clientX || (e.touches && e.touches[0]?.clientX) || 0;
+    velocityRef.current = 0;
+    lastXRef.current = x;
+    lastTRef.current = Date.now();
   };
 
   const onPointerMove = (e) => {
     const el = scrollerRef.current;
     if (!el || !isDraggingRef.current) return;
+
     const x = e.clientX || (e.touches && e.touches[0]?.clientX) || 0;
+    const now = Date.now();
+
     const walk = x - startXRef.current;
     el.scrollLeft = startScrollLeftRef.current - walk;
+
+    const dt = Math.max(1, now - (lastTRef.current || now));
+    const dx = x - (lastXRef.current || x);
+    velocityRef.current = dx / dt;
+    lastXRef.current = x;
+    lastTRef.current = now;
+
     if (e.cancelable) e.preventDefault();
   };
 
@@ -108,8 +125,26 @@ export default function UpcomingCourses({ events = [] }) {
         e.target.releasePointerCapture(e.pointerId);
       }
     }
+
+    const v = velocityRef.current;
+    velocityRef.current = 0;
+    lastXRef.current = 0;
+    lastTRef.current = 0;
     const elNow = scrollerRef.current;
     if (elNow) updateArrowsFromEl(elNow);
+    if (elNow) {
+      const maxScroll = Math.max(0, elNow.scrollWidth - elNow.clientWidth);
+
+      const threshold = 0.3;
+      if (Math.abs(v) > threshold) {
+        const flingFactor = 800;
+        let target = elNow.scrollLeft - v * flingFactor;
+        target = Math.min(Math.max(0, target), maxScroll);
+        elNow.scrollTo({ left: target, behavior: 'smooth' });
+        Promise.resolve().then(() => updateArrowsFromEl(elNow));
+        setTimeout(() => updateArrowsFromEl(elNow), 300);
+      }
+    }
   };
 
   const scrollByAmount = (dir = 1) => {
