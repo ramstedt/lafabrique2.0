@@ -12,6 +12,9 @@ export default async function HyraEvent() {
     <>
       <main className={styles.wrapper}>
         <div>
+          <br />
+          <br />
+          <br />
           <h1>{meetings.meetings.title}</h1>
           <PortableText value={meetings.meetings.text} />
         </div>

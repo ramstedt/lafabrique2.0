@@ -16,6 +16,16 @@ export async function POST(req) {
       referral,
     } = await req.json();
 
+    const sanitize = (v) => {
+      if (typeof v !== 'string') return '';
+      return v.replace(/\*?undefined|\*?null/g, '').trim();
+    };
+    const sanitizedEvent = sanitize(event);
+    const sanitizedRental = sanitize(rental);
+    const combinedEventRental = [sanitizedEvent, sanitizedRental]
+      .filter(Boolean)
+      .join(' ');
+
     let recipientEmail;
     if (sendTo === 'karin') {
       recipientEmail = process.env.KARIN_EMAIL;
@@ -35,7 +45,7 @@ export async function POST(req) {
     await transporter.sendMail({
       from: email,
       to: recipientEmail,
-      subject: `Intresseanmälan: ${event || ''} ${rental || ''}`.trim(),
+      subject: `Intresseanmälan: ${combinedEventRental}`,
       text: `
         Förnamn: ${firstName}
         Efternamn: ${surname}

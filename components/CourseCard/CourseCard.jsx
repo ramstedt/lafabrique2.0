@@ -1,14 +1,14 @@
-"use client";
-import { client } from "@/sanity/sanity";
-import imageUrlBuilder from "@sanity/image-url";
-import { useState, useEffect, useRef } from "react";
-import styles from "./CourseCard.module.css";
-import { useParams, useRouter } from "next/navigation";
-import { fetchCourseBySlug, fetchEventBySlug } from "@/utils/fetchCourses";
-import Form from "@/components/Form/Form";
-import Image from "next/image";
-import { PortableText } from "@portabletext/react";
-import { formatDateWithTime } from "@/utils/formatDates";
+'use client';
+import { client } from '@/sanity/sanity';
+import imageUrlBuilder from '@sanity/image-url';
+import { useState, useEffect, useRef } from 'react';
+import styles from './CourseCard.module.css';
+import { useParams, useRouter } from 'next/navigation';
+import { fetchCourseBySlug, fetchEventBySlug } from '@/utils/fetchCourses';
+import Form from '@/components/Form/Form';
+import Image from 'next/image';
+import { PortableText } from '@portabletext/react';
+import { formatDateWithTime } from '@/utils/formatDates';
 
 const builder = imageUrlBuilder(client);
 const urlFor = (source) => builder.image(source).url();
@@ -18,7 +18,7 @@ export default function CourseCard() {
   const router = useRouter();
   const [event, setEvent] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const formRef = useRef(null);
 
   useEffect(() => {
@@ -35,8 +35,8 @@ export default function CourseCard() {
             await fetchEventBySlug(slug);
           if (eventError) {
             setError(eventError);
-            if (eventError === "Eventet hittades inte") {
-              router.replace("/404");
+            if (eventError === 'Eventet hittades inte') {
+              router.replace('/404');
             }
           } else {
             setEvent(eventData);
@@ -54,7 +54,7 @@ export default function CourseCard() {
 
   const scrollToForm = () => {
     if (formRef.current) {
-      formRef.current.scrollIntoView({ behavior: "smooth" });
+      formRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -91,27 +91,27 @@ export default function CourseCard() {
       <div className={styles.overview}>
         {event.seats && (
           <div>
-            <strong>Lediga platser:</strong> {event.freeSeats} av {event.seats}
+            <strong>Antal platser:</strong> {event.seats}
           </div>
         )}
 
         <ul>
-          <strong>{dateTimes.length >= 2 ? "Tillfällen" : "Tid"}:</strong>
+          <strong>{dateTimes.length >= 2 ? 'Tillfällen' : 'Tid'}:</strong>
           {dateTimes.map((dateTime, key) => (
             <li key={key} className={styles.time}>
               {formatDateWithTime(dateTime)}
             </li>
           ))}
           <small className={styles.sessionLength}>
-            {event.category === "Workshop" ? (
+            {event.category === 'Workshop' ? (
               <>
-                Workshoppen varar i {event.hour}{" "}
-                {event.hour > 2 ? "timmar" : "timme"}
+                Workshoppen varar i {event.hour}{' '}
+                {event.hour > 2 ? 'timmar' : 'timme'}
               </>
             ) : (
               <>
-                (Varje tillfälle är {event.hour}{" "}
-                {event.hour > 2 ? "timmar" : "timme"})
+                (Varje tillfälle är {event.hour}{' '}
+                {event.hour > 2 ? 'timmar' : 'timme'})
               </>
             )}
           </small>
