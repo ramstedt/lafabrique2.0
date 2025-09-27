@@ -1,20 +1,19 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import imageUrlBuilder from '@sanity/image-url';
 import { client } from '@/sanity/sanity';
 import styles from './UpcomingCourses.module.css';
-import { GoChevronRight, GoChevronLeft } from 'react-icons/go';
+import dynamic from 'next/dynamic';
+const Carousel = dynamic(() => import('react-multi-carousel'), { ssr: false });
+import 'react-multi-carousel/lib/styles.css';
 
 const builder = imageUrlBuilder(client);
 const urlFor = (source) => builder.image(source).url();
 
 export default function UpcomingCourses({ events = [] }) {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-
   const data = useMemo(() => {
     const sorted = Array.isArray(events)
       ? [...events].sort((a, b) => (a.firstDate || 0) - (b.firstDate || 0))
@@ -22,221 +21,52 @@ export default function UpcomingCourses({ events = [] }) {
     return sorted.slice(0, 5);
   }, [events]);
 
-  const scrollerRef = useRef(null);
-  const isDraggingRef = useRef(false);
-  const startXRef = useRef(0);
-  const startScrollLeftRef = useRef(0);
-  const velocityRef = useRef(0);
-  const lastXRef = useRef(0);
-  const lastTRef = useRef(0);
-  const [showLeftArrow, setShowLeftArrow] = useState(false);
-  const [showRightArrow, setShowRightArrow] = useState(false);
-
-  const updateArrowsFromEl = (el) => {
-    if (!el) return;
-    const canScroll = el.scrollWidth > el.clientWidth;
-    const maxScroll = Math.max(0, el.scrollWidth - el.clientWidth);
-    const ratio = maxScroll > 0 ? el.scrollLeft / maxScroll : 0;
-    const atStart = ratio <= 0.1;
-    const atEnd = ratio >= 0.9;
-
-    setShowLeftArrow(!atStart && canScroll);
-    setShowRightArrow(!atEnd && canScroll);
-  };
-
-  useEffect(() => {
-    if (!mounted) return;
-    const el = scrollerRef.current;
-    if (!el) return;
-
-    let rafId = 0;
-    let endTimer = null;
-
-    const onScroll = () => {
-      if (rafId) cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(() => updateArrowsFromEl(el));
-      if (endTimer) clearTimeout(endTimer);
-      endTimer = setTimeout(() => updateArrowsFromEl(el), 120);
-    };
-
-    const onResize = () => updateArrowsFromEl(el);
-    updateArrowsFromEl(el);
-
-    el.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onResize);
-    return () => {
-      if (rafId) cancelAnimationFrame(rafId);
-      if (endTimer) clearTimeout(endTimer);
-      el.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onResize);
-    };
-  }, [mounted]);
-
-  const onPointerDown = (e) => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    isDraggingRef.current = true;
-    if (e.target.setPointerCapture && e.pointerId != null) {
-      e.target.setPointerCapture(e.pointerId);
-    }
-    el.classList.add(styles.grabbing);
-    el.classList.add(styles.noSnap);
-    startXRef.current = e.clientX || (e.touches && e.touches[0]?.clientX) || 0;
-    startScrollLeftRef.current = el.scrollLeft;
-    const x = e.clientX || (e.touches && e.touches[0]?.clientX) || 0;
-    velocityRef.current = 0;
-    lastXRef.current = x;
-    lastTRef.current = Date.now();
-  };
-
-  const onPointerMove = (e) => {
-    const el = scrollerRef.current;
-    if (!el || !isDraggingRef.current) return;
-
-    const x = e.clientX || (e.touches && e.touches[0]?.clientX) || 0;
-    const now = Date.now();
-
-    const walk = x - startXRef.current;
-    el.scrollLeft = startScrollLeftRef.current - walk;
-
-    const dt = Math.max(1, now - (lastTRef.current || now));
-    const dx = x - (lastXRef.current || x);
-    velocityRef.current = dx / dt;
-    lastXRef.current = x;
-    lastTRef.current = now;
-
-    if (e.cancelable) e.preventDefault();
-  };
-
-  const endDrag = (e) => {
-    const el = scrollerRef.current;
-    isDraggingRef.current = false;
-    if (el) {
-      el.classList.remove(styles.grabbing);
-      el.classList.remove(styles.noSnap);
-    }
-    if (
-      e &&
-      e.target &&
-      e.target.releasePointerCapture &&
-      e.pointerId != null
-    ) {
-      {
-        e.target.releasePointerCapture(e.pointerId);
-      }
-    }
-
-    const v = velocityRef.current;
-    velocityRef.current = 0;
-    lastXRef.current = 0;
-    lastTRef.current = 0;
-    const elNow = scrollerRef.current;
-    if (elNow) updateArrowsFromEl(elNow);
-    if (elNow) {
-      const maxScroll = Math.max(0, elNow.scrollWidth - elNow.clientWidth);
-
-      const threshold = 0.3;
-      if (Math.abs(v) > threshold) {
-        const flingFactor = 800;
-        let target = elNow.scrollLeft - v * flingFactor;
-        target = Math.min(Math.max(0, target), maxScroll);
-        elNow.scrollTo({ left: target, behavior: 'smooth' });
-        Promise.resolve().then(() => updateArrowsFromEl(elNow));
-        setTimeout(() => updateArrowsFromEl(elNow), 300);
-      }
-    }
-  };
-
-  const scrollByAmount = (dir = 1) => {
-    const el = scrollerRef.current;
-    if (!el) return;
-
-    const cards = Array.from(el.querySelectorAll(`.${styles.card}`));
-    if (!cards.length) return;
-
-    const padLeft = parseFloat(getComputedStyle(el).paddingLeft || '0');
-
-    const epsilon = 2;
-    const maxScroll = Math.max(0, el.scrollWidth - el.clientWidth);
-    const positions = cards.map((c) => Math.max(0, c.offsetLeft - padLeft));
-
-    const current = el.scrollLeft;
-
-    let target;
-    if (dir > 0) {
-      target = positions.find((p) => p > current + epsilon);
-      if (target === undefined) {
-        target = maxScroll;
-      }
-    } else {
-      const prev = positions.filter((p) => p < current - epsilon);
-      target = prev.length ? prev[prev.length - 1] : 0;
-    }
-
-    target = Math.min(Math.max(0, target), maxScroll);
-
-    if (maxScroll === 0) {
-      setShowLeftArrow(false);
-      setShowRightArrow(false);
-    } else if (target <= maxScroll * 1) {
-      setShowLeftArrow(false);
-      setShowRightArrow(true);
-    } else if (target >= maxScroll * 0.9) {
-      setShowRightArrow(false);
-      setShowLeftArrow(true);
-    } else {
-      setShowLeftArrow(true);
-      setShowRightArrow(true);
-    }
-
-    el.scrollTo({ left: target, behavior: 'smooth' });
-    Promise.resolve().then(() => updateArrowsFromEl(el));
-    setTimeout(() => updateArrowsFromEl(el), 220);
-  };
-
-  if (!mounted) return null;
   if (!data || data.length === 0) return <div />;
 
+  const responsive = {
+    superLargeDesktop: {
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
+  };
+  console.log('events prop', events);
+  console.log('data', data);
   return (
     <>
       <section className={styles.wrapper} aria-label='Kommande kurser'>
-        <h2 className={styles.heading}>Kommande kurser</h2>
-
-        <button
-          type='button'
-          aria-label='Scrolla vänster'
-          className={`${styles.arrow} ${styles.left} ${showLeftArrow ? styles.visible : styles.hidden}`}
-          onClick={() => scrollByAmount(-1)}
-        >
-          <GoChevronLeft />
-        </button>
-
-        <button
-          type='button'
-          aria-label='Scrolla höger'
-          className={`${styles.arrow} ${styles.right} ${showRightArrow ? styles.visible : styles.hidden}`}
-          onClick={() => scrollByAmount(1)}
-        >
-          <GoChevronRight />
-        </button>
-
-        {showLeftArrow && <div aria-hidden className={styles.fadeLeft} />}
-        {showRightArrow && <div aria-hidden className={styles.fadeRight} />}
-
-        <div
-          ref={scrollerRef}
-          className={styles.scroller}
-          onPointerDown={onPointerDown}
-          onPointerMove={onPointerMove}
-          onPointerUp={endDrag}
-          onPointerLeave={endDrag}
-          onPointerCancel={endDrag}
-          onTouchStart={onPointerDown}
-          onTouchMove={onPointerMove}
-          onTouchEnd={endDrag}
+        <h1>Kommande kurser</h1>
+        <p>
+          Här finns ett axplock av våra kommande kurser. Du hittar alla vara
+          kurser i <Link href='/katalog'>Kurskatalogen</Link>
+        </p>
+        <Carousel
+          responsive={responsive}
+          swipeable
+          draggable
+          showDots={true}
+          infinite={true}
+          autoPlaySpeed={3000}
+          keyBoardControl={true}
+          customTransition='transform 0.5s ease-in-out'
+          transitionDuration={500}
+          containerClass='carousel-container'
+          dotListClass='custom-dot-list-style'
+          itemClass='carousel-item-padding-40-px'
         >
           {data.map((course, key) => (
-            <article
+            <div
               className={styles.card}
               key={(course._id || course.name) + key}
             >
@@ -258,7 +88,7 @@ export default function UpcomingCourses({ events = [] }) {
                 {course.slug?.current && (
                   <Link
                     className={styles.link}
-                    href={`/kurser/${course.slug.current}`}
+                    href={`/katalog/${course.slug.current}`}
                   >
                     <h3 className={styles.title}>
                       {course.name || course.title}
@@ -266,9 +96,9 @@ export default function UpcomingCourses({ events = [] }) {
                   </Link>
                 )}
               </div>
-            </article>
+            </div>
           ))}
-        </div>
+        </Carousel>
       </section>
 
       <div className={styles.buttonWrapper}>

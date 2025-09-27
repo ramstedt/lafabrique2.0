@@ -110,7 +110,10 @@ main > * {
 .fullRow {
   grid-column: 1 / -1;
 }
-
+p a {
+  text-decoration: underline;
+  font-weight: 600;
+}
 ul {
   list-style-type: none;
   padding: 0;
