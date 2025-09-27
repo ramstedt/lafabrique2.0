@@ -11,7 +11,10 @@ export default async function Hyra() {
   return (
     <>
       <main className={styles.wrapper}>
+        <br /> <br /> <br /> <br /> <br />
         <div>
+          {' '}
+          <br /> <br /> <br />
           <h1>Hyr plats på La Fabrique</h1>
           <PortableText value={data.rent.description} />
         </div>
