@@ -11,6 +11,7 @@ export default function Form({ event, rentals }) {
     phone: '',
     message: '',
     rental: '',
+    referral: '',
   });
   const [status, setStatus] = useState('');
   const [disableButton, setDisabledButton] = useState(false);
@@ -18,7 +19,8 @@ export default function Form({ event, rentals }) {
   const onSubmit = async (e) => {
     e.preventDefault();
     setDisabledButton(true);
-    const { firstName, surname, email, phone, message, rental } = formData;
+    const { firstName, surname, email, phone, message, rental, referral } =
+      formData;
 
     const requestData = {
       firstName,
@@ -27,6 +29,7 @@ export default function Form({ event, rentals }) {
       phone,
       message,
       rental,
+      referral,
       event: event?.name + event?.title,
       sendTo: event?.sendTo || 'karin',
     };
@@ -53,6 +56,7 @@ export default function Form({ event, rentals }) {
         email: '',
         phone: '',
         message: '',
+        referral: '',
       });
       setDisabledButton(false);
     }
@@ -143,6 +147,22 @@ export default function Form({ event, rentals }) {
               </select>
             </div>
           )}
+          <div className={styles.formBlock}>
+            <label htmlFor='referral'>Vart hörde du om oss?</label>
+            <select
+              name='referral'
+              id='referral'
+              value={formData.referral}
+              onChange={handleChange}
+            >
+              <option value=''>Välj...</option>
+              <option value='sociala medier'>Sociala medier</option>
+              <option value='bokmässan'>Bokmässan</option>
+              <option value='via en vän'>Via en vän</option>
+              <option value='google'>Google</option>
+              <option value='annat'>Annat</option>
+            </select>
+          </div>
           <div className={styles.formBlock}>
             <label htmlFor='message'>Meddelande</label>
             <textarea

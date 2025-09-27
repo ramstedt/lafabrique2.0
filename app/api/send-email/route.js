@@ -1,11 +1,20 @@
-/* eslint-env node */
+/ * eslint-env node */;
 import nodemailer from 'nodemailer';
 export const runtime = 'nodejs';
 
 export async function POST(req) {
   try {
-    const { firstName, surname, email, phone, message, event, rental, sendTo } =
-      await req.json();
+    const {
+      firstName,
+      surname,
+      email,
+      phone,
+      message,
+      event,
+      rental,
+      sendTo,
+      referral,
+    } = await req.json();
 
     let recipientEmail;
     if (sendTo === 'karin') {
@@ -32,6 +41,7 @@ export async function POST(req) {
         Efternamn: ${surname}
         Email: ${email}
         Telefon: ${phone}
+        Vart hörde du om oss?: ${referral}
         
         Meddelande:
         ${message}
