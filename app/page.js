@@ -40,7 +40,9 @@ export default async function Home() {
           </ul>
         </div>
       </div>
+
       <div className={styles.textBlockWrapper}>
+        <div className={styles.textBlockBg}>hej</div>
         <div className={styles.textBlock}>
           “Varje barn är en konstnär. Problemet är att förbli en när man blir
           vuxen.” <br />

@@ -38,30 +38,35 @@
 }
 
 .textBlockWrapper {
-  background-color: #1f1918;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
   grid-column: 1 / -1;
-  max-width: 100vw;
-  padding: 2rem 4%;
-  text-align: center;
-  margin-left: calc(-50vw + 50%);
+}
+
+.textBlockBg {
+  background-color: #1f1918;
+  grid-area: 1 / 1 / 2 / 2;
+  z-index: 0;
 }
 
 .textBlock {
-  width: fit-content;
-  color: #f1e8de;
-  text-align: center;
-  font-size: 1.5rem;
-  font-style: italic;
+  grid-area: 1 / 1 / 2 / 2;
+  position: relative;
+  z-index: 1;
+  color: white;
   margin: auto;
+  padding: 3rem 4% 2.1rem 4%;
+  text-align: center;
+  font-size: 1.1rem;
+  font-style: italic;
+}
+
+.name {
+  text-align: right;
 }
 
 @media screen and (min-width: 768px) {
-  .textBlock {
-    text-align: center;
-  }
-  .name {
-    text-align: right;
-  }
   .infoCardsWrapper {
     flex-direction: row;
     flex-wrap: wrap;
@@ -79,8 +84,18 @@
   .introText {
     max-width: 800px;
   }
+  .textBlock {
+    font-size: 1.6rem;
+    padding-top: 4.5rem;
+    padding-bottom: 3.4rem;
+  }
+}
+
+@media screen and (min-width: 1440px) {
   .textBlockWrapper {
-    padding-top: 5rem;
-    padding-bottom: 3rem;
+    width: 100vw;
+    max-width: 100vw;
+    grid-column: 1 / -1;
+    margin-left: calc(-1 * (100vw - 100%) / 2);
   }
 }
