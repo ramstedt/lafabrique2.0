@@ -13,12 +13,24 @@ export default function Footer({ data }) {
         <div className={styles.contactWrapper}>
           {data.address1 && (
             <>
-              <div className={styles.addressOne}>{data.address1}</div>
+              <div className={styles.addressOne}>
+                <big>{data.address1}</big>
+              </div>
             </>
           )}
           {data.address2 && (
             <>
-              <div className={styles.addressTwo}>{data.address2}</div>
+              <div className={styles.addressTwo}>
+                <big>{data.address2}</big>
+              </div>
+              <br />
+              {data.openingHours && (
+                <>
+                  <div className={styles.openingHours}>{data.openingHours}</div>
+                </>
+              )}
+              <br /> <h3>Vägbeskrivning:</h3>
+              <div>6 minuter promenad från Vagnhallen Majorna</div>
               <div>
                 <Link
                   href='https://maps.app.goo.gl/NfbaXjcZ7y9wmVpKA'
@@ -27,11 +39,6 @@ export default function Footer({ data }) {
                   Hitta hit
                 </Link>
               </div>
-            </>
-          )}
-          {data.openingHours && (
-            <>
-              <div className={styles.openingHours}>{data.openingHours}</div>
             </>
           )}
           <br />
