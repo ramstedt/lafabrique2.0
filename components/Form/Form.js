@@ -1,7 +1,9 @@
 'use client';
 import { useState } from 'react';
 import ClipLoader from 'react-spinners/ClipLoader';
+import Link from 'next/link';
 import styles from './Form.module.css';
+import PrivacyModal from '../PrivacyModal/PrivacyModal';
 
 export default function Form({ event, rentals }) {
   const [formData, setFormData] = useState({
@@ -172,6 +174,18 @@ export default function Form({ event, rentals }) {
               id='message'
               placeholder='Skriv ditt meddelande...'
             ></textarea>
+          </div>
+          <div className={styles.formBlock}>
+            <p className={styles.gdprText}>
+              Genom att skicka detta formulär godkänner du att vi behandlar dina
+              personuppgifter (namn och e-post) i syfte att hantera din
+              förfrågan. Läs mer i vår{' '}
+              <PrivacyModal
+                buttonColor='inherit'
+                buttonHoverColor='inherit'
+                capitalize={false}
+              />
+            </p>
           </div>
           <div className={styles.formBlock}>
             <p>{status}</p>

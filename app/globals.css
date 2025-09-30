@@ -62,7 +62,8 @@ label {
 body,
 p,
 span,
-a {
+a,
+button {
   font-family: var(--font-body) !important;
 }
 
@@ -74,6 +75,13 @@ h3 {
   text-transform: capitalize;
   letter-spacing: 0.1rem;
   font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+h4 {
+  letter-spacing: 0.1rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
 }
 
 button {
