@@ -13,6 +13,7 @@ export default function PrivacyModal({
   return (
     <>
       <button
+        type='button'
         className={styles.openButton}
         onClick={() => setIsOpen(true)}
         style={{ color: buttonColor }}

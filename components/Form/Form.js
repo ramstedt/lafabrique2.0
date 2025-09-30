@@ -176,7 +176,7 @@ export default function Form({ event, rentals }) {
             ></textarea>
           </div>
           <div className={styles.formBlock}>
-            <p className={styles.gdprText}>
+            <div className={styles.gdprText}>
               Genom att skicka detta formulär godkänner du att vi behandlar dina
               personuppgifter (namn och e-post) i syfte att hantera din
               förfrågan. Läs mer i vår{' '}
@@ -185,7 +185,7 @@ export default function Form({ event, rentals }) {
                 buttonHoverColor='inherit'
                 capitalize={false}
               />
-            </p>
+            </div>
           </div>
           <div className={styles.formBlock}>
             <p>{status}</p>
