@@ -20,7 +20,10 @@ export default function Footer({ data }) {
             <>
               <div className={styles.addressTwo}>{data.address2}</div>
               <div>
-                <Link href='https://maps.app.goo.gl/NfbaXjcZ7y9wmVpKA'>
+                <Link
+                  href='https://maps.app.goo.gl/NfbaXjcZ7y9wmVpKA'
+                  target='_blank'
+                >
                   Hitta hit
                 </Link>
               </div>
